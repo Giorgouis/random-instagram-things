@@ -29,3 +29,13 @@ def get_unfollowers(followers_data, following_data, is_path=True):
                 not_following_back.append(x)
 
         return not_following_back
+
+def get_removed_suggestions(removed_suggestions_data, is_path=True):
+    if is_path:
+
+        with open(removed_suggestions_data, 'r') as fp:
+            data = json.load(fp)
+            return [x['string_list_data'][0]['href'] for x in data['relationships_dismissed_suggested_users']]
+        
+    else:
+        return [x['string_list_data'][0]['href'] for x in removed_suggestions_data['relationships_dismissed_suggested_users']]
